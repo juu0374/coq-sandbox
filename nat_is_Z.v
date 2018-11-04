@@ -295,14 +295,6 @@ Defined.
 Definition Zrec (P : Type) (z : P) (s : P -> P) (p : P -> P) : Z -> P :=
   Zind (fun _ => P) z (fun _ => s) (fun _ => p).
 
-Lemma apD : forall {A : Type} {B : A -> Type} (f : forall a : A, B a) {x y : A}
-         (p : x = y), eq_rect x B (f x) y p = f y.
-Proof.
-  intros.
-  destruct p.
-  reflexivity.
-Qed.
-
 Lemma Zrec_beta_succ (P : Type) (z : P) (s : P -> P) (p : P -> P) 
               (i2 : forall (m : P), m = s (p m)) (n : Z)
 : Zrec P z s p (Zsucc n) = s (Zrec P z s p n).
