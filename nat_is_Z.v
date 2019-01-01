@@ -5,16 +5,6 @@ Definition Z := nat.
 Definition Even (x : Z) := { y : Z & y + y = x }.
 Definition Odd (x : Z) := { y : Z & S (y + y) = x }.
 
-Lemma plus_n_Sm : forall n m : nat, S (n + m) = n + S m.
-Proof.
-  intros.
-  induction n.
-  reflexivity.
-  simpl.
-  apply f_equal.
-  apply IHn.
-Defined.
-
 Definition Even_or_Odd : forall x, Even x + Odd x.
 Proof.
   induction x.
@@ -32,44 +22,6 @@ Proof.
   apply f_equal.
   induction (plus_n_Sm (projT1 b) (projT1 b)).
   apply (projT2 b).
-Defined.
-
-Lemma S_pred : forall n m : nat, m < n -> n = S (Init.Nat.pred n).
-Proof.
-  intros.
-  induction n.
-  destruct H.
-  reflexivity.
-  simpl.
-  reflexivity.
-  simpl.
-  reflexivity.
-Defined.
-
-Lemma neq_0_lt : forall n : nat, 0 <> n -> 0 < n.
-Proof.
-  destruct n.
-  intro.
-  destruct H.
-  reflexivity.
-  intro.
-  unfold lt.
-  induction n.
-  apply le_n.
-  apply le_S.
-  apply IHn.
-  discriminate.
-Defined.
-
-Lemma plus_Snm_nSm
-     : forall n m : nat, S n + m = n + S m.
-Proof.
-  induction n.
-  reflexivity.
-  simpl.
-  intro.
-  apply f_equal.
-  apply IHn.
 Defined.
 
 Definition even (n : nat) : Z := n + n.
